@@ -9,7 +9,7 @@
 
 .sideBar{
     background-color: rgba(0, 0, 0, 0.9);
-    height: 100vh;
+    height: 100%;
     width: 20vh;
 }
 
@@ -22,14 +22,21 @@
     padding: 0;
 }
 
-.sideBarItems li{
-    padding-inline: 9vh;
+.side-text {
+    font-size: 0.9rem;
+    padding-inline: 3vh;
     padding-block: 1rem;
-    margin-block: 1.5rem;
+    margin-block: 1rem;
     /* border-radius: 0.6rem; */
 }
 
-.sideBarItems li:hover{
+.side-text div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.side-text:hover{
     background-color:grey ;
     color: black;
 }
@@ -43,6 +50,15 @@
 
 .sidebarViewToggle{
     display: hidden;
+}
+
+@media (max-width: 920px) {
+    side-text div{
+        flex-direction: column;
+    }
+    #itemTitle{
+        display: none;
+    }
 }
 
 @media (max-width: 600px){
