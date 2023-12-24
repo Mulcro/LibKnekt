@@ -1,7 +1,9 @@
+import {Link} from 'react-router-dom';
 import '../assets/sidebar.css';
 import {useState,useEffect,useRef} from 'react';
 import {IoIosArrowForward} from 'react-icons/io';
 import {IoIosArrowBack} from 'react-icons/io';
+import {data} from '../assets/data/sidebarData';
 
 const SideBar = (props) => {
     const [sideBarOpen, setSideBar] = useState(false);
@@ -44,11 +46,22 @@ const SideBar = (props) => {
             <section ref={sideBarRef} className="sideBar" data-sideBarOpen="false">
                 
                 <ul  className="sideBarItems">
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li>5</li>
+                    {data.map((item,key) => {
+                        return(
+                            <li key={key} className={item.cName}>
+                                <Link to={item.path}>
+                                    <div>
+                                        <div>
+                                            <p>{item.icon}</p>  
+                                        </div>
+                                        <div>
+                                            <p id='itemTitle'>{item.title}</p> 
+                                        </div>
+                                    </div>
+                                </Link>
+                            </li>
+                        )
+                    })}
                 </ul>
             </section>
 

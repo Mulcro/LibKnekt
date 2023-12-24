@@ -1,6 +1,7 @@
 import {GiHamburgerMenu} from 'react-icons/gi';
 import {useRef,useEffect,useState} from 'react';
 import {AiOutlineClose} from 'react-icons/ai';
+import {Link} from 'react-router-dom';
 import '../assets/navbar.css'
 const Navbar = () => {
     const navClose = useRef();
@@ -40,11 +41,18 @@ const Navbar = () => {
                 <AiOutlineClose onClick={() => toggleNav()} className={navOpen === false ? "hidden" : "mobileNavToggle"} ref={navClose} size={25}/>
 
                 <ul ref={navRef} data-visible="false">
-                    <li>Home</li>
-                    <li>Login</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                    <li>Admin</li>
+                    <li>
+                        <Link to ="/login">Login</Link>
+                    </li>
+                    <li>
+                        <Link to ="/about">About</Link>
+                    </li>
+                    <li>
+                        <Link to ="/contact">Contact</Link>
+                    </li>
+                    <li>
+                        <Link to ="/admin">Admin</Link>
+                    </li>
                 </ul>
             </div>
         </div>
