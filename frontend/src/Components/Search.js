@@ -36,7 +36,7 @@ const Search = () => {
     const handleSearch = e => {
         e.preventDefault();
 
-        fetch(BaseUrl + "/search",{
+        fetch(BaseUrl + "search",{
                 method: "POST",
                 headers:{
                     "Content-Type":"application/json",
