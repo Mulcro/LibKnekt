@@ -2,6 +2,7 @@ import {useState, useEffect, useRef, useContext} from 'react';
 import '../assets/admin.css';
 import { FaRegWindowClose } from "react-icons/fa";
 import UserContext from '../Context/userContext';  
+import BaseUrl from '../BaseUrl';
 
 const Admin = () => {
     const [user,setUser] = useContext(UserContext);
