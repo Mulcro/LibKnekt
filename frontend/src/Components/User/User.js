@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import UserContext from '../../hooks/userContext';
+import UserContext from '../../Context/userContext';
 import { useContext, useEffect, useState, useRef } from 'react';
 import '../../assets/user.css';
 import { FaRegWindowClose } from "react-icons/fa";

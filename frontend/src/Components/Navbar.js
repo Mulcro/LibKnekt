@@ -3,7 +3,7 @@ import {useRef,useEffect,useState, useContext} from 'react';
 import {AiOutlineClose} from 'react-icons/ai';
 import {Link} from 'react-router-dom';
 import '../assets/navbar.css'
-import UserContext from '../hooks/userContext';
+import UserContext from '../Context/userContext';
 import useRefresh from '../hooks/useRefresh';
 const Navbar = () => {
     const [user, setUser] = useContext(UserContext);

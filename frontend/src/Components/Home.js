@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import '../assets/home.css';
-import UserContext from '../hooks/userContext';
+import UserContext from '../Context/userContext';
 
 const HomePage = () => {
     const [user,setUser] = useContext(UserContext);

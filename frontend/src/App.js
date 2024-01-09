@@ -1,6 +1,6 @@
 import './App.css';
 import {BrowserRouter as Router,Route, Routes} from 'react-router-dom';
-import UserProvider from './hooks/UserProvider';
+import UserProvider from './Context/UserProvider';
 import Home from './Components/Home';
 import Navbar from './Components/Navbar';
 import SideBar from './Components/Sidebar';

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import '../../assets/bookCover.css';
-import {Link, useParams} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import BaseUrl from '../../BaseUrl';
 //This is the component for the book objects displayed whenever the book covers are displayed
 
