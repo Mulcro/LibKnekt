@@ -1,7 +1,9 @@
-import {useEffect, useState} from 'react';
+import {useContext, useEffect, useState} from 'react';
+import UserContext from './userContext';
+import BaseUrl from '../BaseUrl';
 
-const useFetch = (url) => {
-
+const useFetch = (ext) => {
+    const token = sessionStorage.getItem("token");
     const [data,setData] = useState([]);
     const [pending, setPending] = useState(false);
     const [err, setErr] = useState(false);
@@ -9,7 +11,11 @@ const useFetch = (url) => {
     useEffect(() => {
         setPending(true);
 
-        fetch(url)
+        fetch(BaseUrl + ext,{
+            headers:{
+                "authorization": `Bearer ${token}`,
+            }
+        })
         .then(res => {
             if(res.status === 200)
                 return res.json();
