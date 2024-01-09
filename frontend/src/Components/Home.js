@@ -1,6 +1,12 @@
+import { useContext, useEffect } from 'react';
 import '../assets/home.css';
+import UserContext from '../hooks/userContext';
 
 const HomePage = () => {
+    const [user,setUser] = useContext(UserContext);
+    useEffect(() => {
+        console.log(user);
+    },[]);
     return ( 
         <div className="homePageContainer">
             <section className="homeUpperSection">
