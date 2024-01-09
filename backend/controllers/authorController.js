@@ -1,4 +1,5 @@
-const Author = require('../model/author');
+const path = require('path');
+const Author = require(path.join(__dirname, '../model/Author'));
 const Book = require('../model/Book');
 
 const getAuthors = async (req,res) => {
