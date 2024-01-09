@@ -1,0 +1,88 @@
+.bookDetails{
+    width: 86vh;
+    height: 75vh;
+    margin-block-start: 3vh;
+    background-color: rgb(227, 216, 202);
+    padding: 2vh;
+    border: 1em solid rgba(0, 0, 0, 0.9);
+    border-radius: 2em;
+}
+
+h2, h3{
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.details{
+    font-weight: bold;
+}
+
+.bookDetailsSection{
+    width: 86vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bookDetailsSection .one{
+    /* margin-block-start: 10vh; */
+    display: flex;
+    flex-direction: column;
+    width: 50vh;
+    padding-inline-end: 5vh;
+}
+
+.borrowSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+.error{
+        text-align: center;
+        width: 12vh;
+        font-size: .7rem;
+        font-weight: bold;
+        margin: 5px auto;
+        background-color: black;
+        padding: 10px 20px;
+        color: orange;
+        border-radius: .5rem;    
+}
+
+.two img{
+    height: 25vh;
+}
+
+.two > :nth-child(1) > :nth-child(1){
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.two > :nth-child(2){
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.two > :nth-child(2) button{
+    padding: 2vh;
+    border-radius: 1rem;
+    font-weight: bold;
+    border: .2rem solid black;
+}
+
+.two > :nth-child(2) button:hover{
+    background-color: rgb(190, 190, 190);
+}
+
+.msg{
+    background-color: rgb(172, 172, 172);
+    border: .1rem solid black;
+    padding: .5rem;
+    text-align: center;
+}
+

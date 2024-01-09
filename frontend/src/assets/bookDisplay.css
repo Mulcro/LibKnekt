@@ -1,12 +1,17 @@
 .bookSection{
+    width: 100vh;
+}
+
+/* Prevents margin when component is encapsulated into another component */
+.bookSection-encapsulated{
     width: 100%;
-    margin-inline-start: 45%;
 }
 
 .bookDisplay{
     display: flex;
     flex-direction:row ;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 h1{

@@ -1,0 +1,70 @@
+.userPage{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2{
+    text-align: center;
+    text-decoration: none;
+}
+
+.userPage > :nth-child(1){
+    background-color: gray;
+    padding: 2rem 1rem;
+    border: .1rem solid black;
+}
+
+.functions{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+.functions div{
+    color: white;
+    background-color: black;
+    margin: 1rem;
+}
+
+.functions div:hover{
+    background-color: slategray;
+    border: .1rem solid black;
+}
+
+.popup{
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 88.5%;
+    width: 80%;
+}
+
+.innerPopup{
+    background-color: gray;
+    padding: 3rem;
+    border: solid .5rem black;
+}
+
+.userFunction button{
+    padding: 1rem 1rem;
+    color: white;
+    font-weight: 500;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}
+
+.innerPopup .closeButton{
+    position: relative;
+    left: 10%;
+
+}
+
+.innerPopup form{
+    display: flex;
+    flex-direction: column;
+}

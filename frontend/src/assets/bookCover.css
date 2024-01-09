@@ -3,7 +3,8 @@
     margin-inline: 1rem;
     color: white;
     font-size: 1rem;
-    width: 17%;
+    width: 10vh;
+    height: 15vh;
     background-image: url('./bookcover.jpg');
     background-size: 100% 100%; /* Adjusts the size of the background image to cover the entire container */
     background-position: center; /* Positions the background image at the center */

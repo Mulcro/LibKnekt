@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-@media (max-width: 1300px)  and (min-width: 1200px) {
+/* @media (max-width: 1300px)  and (min-width: 1200px) {
     .homePageContainer{
         margin-left: 45%;
     }    
@@ -31,4 +31,4 @@
     .homePageContainer{
         margin-left:0%;
     }    
-}
+} */
