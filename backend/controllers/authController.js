@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const handleLogin = async (req,res) => {
+    console.log("Working 1");
+
     const user = req.body.user.toLowerCase();
     const pwd = req.body.pwd;
     if(!user || !pwd) return res.sendStatus(400);
@@ -10,6 +12,7 @@ const handleLogin = async (req,res) => {
     
     if(!foundUser) return res.sendStatus(401);
     
+    console.log("Working 2");
     const match = await bcrypt.compare(pwd, foundUser.password);
     if(match){
         const books = Object.values(foundUser.books);
@@ -40,6 +43,8 @@ const handleLogin = async (req,res) => {
         res.json({user, books, roles, accessToken,refreshToken});
     }
     else{
+        console.log("Working 3");
+
         res.sendStatus(500);
     }
 
