@@ -3,7 +3,6 @@ const Book = require('../model/Book');
 const bcrypt = require('bcrypt');
 
 const getUsers = async (req,res) => {
-    console.log("Working");
     const rawUsers = await User.find({}).exec();
 
     if(!rawUsers) return res.sendStatus(404);
@@ -34,7 +33,7 @@ const getUser = async (req,res) => {
     if(!foundUser) return res.sendStatus(404);
 
     const books = [];
-
+    const roles = [];
     for(const book of foundUser.books){
         const result = await Book.findById(book).exec();
         books.push(result);
@@ -47,7 +46,8 @@ const getUser = async (req,res) => {
         email: foundUser.email,
         username: foundUser.username,
         profile: foundUser.profilePic,
-        books: books
+        books: books,
+        roles: Object.values(foundUser.roles)
     }
     res.json(data);
 }
@@ -74,7 +74,7 @@ const returnBook = async (req,res) => {
     const result = await foundUser.save();
     if(!result) return res.sendStatus(500);
 
-    book.quantity ++;
+    book.quantity = book.quantity + 1;
     
     const result2 = await book.save();
     if(!result2) return res.sendStatus(500);
@@ -124,12 +124,10 @@ const updatePassword = async (req,res) => {
 
 const addRole = async (req,res) => {
     if(!req.params.username && !req.body.userRole) res.sendStatus(422);
-    console.log("Working");
+
     const role = parseInt(req.body.userRole);
 
     const username = req.params.username;
-
-    console.log(role,username);
 
     const foundUser = await User.findOne({username});
     if(!foundUser) return res.sendStatus(404);
@@ -164,7 +162,6 @@ const addRole = async (req,res) => {
 
 const deleteRole = async(req,res) => {
     if(!req.params.username && !req.body.userRole) res.sendStatus(422);
-    
     const role = parseInt(req.body.userRole);
 
     const user = req.params.username;
@@ -173,9 +170,7 @@ const deleteRole = async(req,res) => {
     if(!foundUser) return res.sendStatus(404);
 
     const roles = Object.values(foundUser.roles);
-    console.log(roles);
     const roleIsPresent = roles.includes(role);
-    console.log(roleIsPresent);
 
     if(!roleIsPresent) return res.sendStatus(404);
 
@@ -203,7 +198,6 @@ const deleteRole = async(req,res) => {
 
         const currentRoles = Object.keys(foundUser.roles).filter(role => role !== "Admin");
 
-        console.log(currentRoles);
 
         let newRoles = {};
         for(const role of currentRoles){
@@ -239,4 +233,37 @@ const deleteUser = async (req,res) => {
     res.json(result);
 }
 
-module.exports = {getUsers,getUser,returnBook,updateUser,updatePassword,addRole, deleteRole, deleteUser};
+const getBorrowedBooks = async (req,res) => {
+    if(!req.params.username) return res.sendStatus(422);
+
+    const foundUser = await User.findOne({username:req.params.username}).populate("books").exec();
+    if(!foundUser) return res.sendStatus(404);
+
+    res.json(foundUser.books);
+}
+
+const findBorrowers = async (req,res) => {
+    console.log(req.params);
+    if(!req.params.bookId) return res.sendStatus(422);
+
+    const users = await User.find({borrowedBooks: req.params.bookId}).exec();
+
+    if(!users) return res.sendStatus(404);
+
+    const filteredUsers = [];
+
+    for(const user of users){
+        data = {
+            id: user._id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+            username: user.username
+        }
+
+        filteredUsers.push(data);
+    }
+
+    return res.json(filteredUsers);
+}
+module.exports = {getUsers,getUser,returnBook,updateUser,getBorrowedBooks, updatePassword,addRole, deleteRole, deleteUser, findBorrowers};
