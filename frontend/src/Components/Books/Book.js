@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import '../../assets/bookCover.css';
 import {Link, useParams} from 'react-router-dom'
+import BaseUrl from '../../BaseUrl';
 //This is the component for the book objects displayed whenever the book covers are displayed
 
 //Data prop is meant to revieve book object
@@ -14,7 +15,7 @@ const Book = ({data,id}) => {
     let book;
 
     if(!data && id) {
-        book = fetch(`http://localhost:4500/books/${id}`,
+        book = fetch(BaseUrl + `books/${id}`,
         {
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`

@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom';
 import "../../assets/register.css";
 import { useEffect, useRef, useState } from 'react';
+import BaseUrl from '../../BaseUrl';
 
 const NAME_REGEX = /^[A-Z][a-z]{2,30}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -65,8 +66,7 @@ const Register = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
-        const url = 'http://localhost:4500/register';
-        fetch(url, {
+        fetch(BaseUrl + 'register', {
             method: "POST",
             headers:{
                 "Content-Type":"application/json",

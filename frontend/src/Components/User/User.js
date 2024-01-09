@@ -4,6 +4,7 @@ import { useContext, useEffect, useState, useRef } from 'react';
 import '../../assets/user.css';
 import { FaRegWindowClose } from "react-icons/fa";
 import DisplayBooks from '../Books/DisplayBooks'; 
+import BaseUrl from '../../BaseUrl';
 
 const NAME_REGEX = /^[A-Z][a-z]{2,30}$/;
 const EMAIL_REGEX = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -14,7 +15,6 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_!@#$%]).{8,24}$/;
 const User = () => {
     //There is currently an error whereby the popup is rendered twice and not closed till the close button is clicked twice
 
-    const url = "http://localhost:4500/";
     const navigate = useNavigate();
     const [user, setUser] = useContext(UserContext);
 
@@ -127,7 +127,7 @@ const User = () => {
     const handleChangePwd = e => {
         e.preventDefault();
 
-        fetch(url + `users/${user.user}/changepwd`,{
+        fetch(BaseUrl + `users/${user.user}/changepwd`,{
             method: "PATCH",
             headers:{
                 "Content-Type":"application/json",
@@ -164,7 +164,7 @@ const User = () => {
     const handleModifyAccount = e => {
         e.preventDefault();
 
-        fetch(url + `users/${user.user}`,{
+        fetch(BaseUrl + `users/${user.user}`,{
             method: "PATCH",
             headers:{
                 "Content-Type":"application/json",
@@ -192,7 +192,7 @@ const User = () => {
 
     const viewBorrowedBooks = () => {
         const username = user.user;
-        fetch(`${url}users/${username}/borrowedbooks`,{
+        fetch(`${BaseUrl}users/${username}/borrowedbooks`,{
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`
             }

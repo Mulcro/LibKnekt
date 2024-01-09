@@ -5,7 +5,6 @@ import UserContext from '../hooks/userContext';
 
 const Admin = () => {
     const [user,setUser] = useContext(UserContext);
-    const url = 'http://localhost:4500';
     // write state for functions
 
     const [addOrDeleteRole,setAddOrDeleteRole] = useState(false);
@@ -57,7 +56,7 @@ const Admin = () => {
     const findUser = e => {
         e.preventDefault();
 
-        fetch(`${url}/users/${username}`,{
+        fetch(`${BaseUrl}users/${username}`,{
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`,
             }
@@ -84,7 +83,7 @@ const Admin = () => {
 
         switch(num){
             case 1:
-                fetch(`${url}/users/${username}/addrole`,{
+                fetch(`${BaseUrl}users/${username}/addrole`,{
                     method: "PATCH",
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -117,7 +116,7 @@ const Admin = () => {
                     console.log(err.message);
                 })
             case 2:
-                fetch(`${url}/users/${username}/deleterole`,{
+                fetch(`${BaseUrl}users/${username}/deleterole`,{
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
                         "Content-Type": "application/json"
@@ -164,7 +163,7 @@ const Admin = () => {
         switch(choice){
             case "author":
             console.log(user);
-            fetch(`${url}/authors`,{
+            fetch(`${BaseUrl}authors`,{
                     method: "POST",
                     headers:{   
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -199,7 +198,7 @@ const Admin = () => {
                 })
                 break;
             case "category":
-                fetch(`${url}/categories`,{
+                fetch(`${BaseUrl}categories`,{
                     method: "POST",
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -244,7 +243,7 @@ const Admin = () => {
     const getAuthorsOrCategories = (choice) => {
         switch(choice){
             case "author":
-                fetch(`${url}/authors`,{
+                fetch(`${BaseUrl}authors`,{
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
                     },
@@ -263,7 +262,7 @@ const Admin = () => {
                 })
                 break;
             case "category":
-                fetch(`${url}/categories`,{
+                fetch(`${BaseUrl}categories`,{
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
                     },
@@ -289,7 +288,7 @@ const Admin = () => {
 
         switch(choice){
             case "author":
-                fetch(`${url}/authors/${author}`,{
+                fetch(`${BaseUrl}authors/${author}`,{
                     method: "PATCH",
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -323,7 +322,7 @@ const Admin = () => {
                 })
                 break;
             case "category":
-                fetch(`${url}/categories/${category}`,{
+                fetch(`${BaseUrl}categories/${category}`,{
                     method: "PATCH",
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -365,7 +364,7 @@ const Admin = () => {
         switch(choice){
 
             case "author":
-                fetch(`${url}/authors/${author}`,{
+                fetch(`${BaseUrl}authors/${author}`,{
                     method: "DELETE",
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -395,7 +394,7 @@ const Admin = () => {
                 })
                 break;
             case "category":
-                fetch(`${url}/categories/${category}`,{
+                fetch(`${BaseUrl}categories/${category}`,{
                     method: "DELETE",
                     headers:{
                         "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -433,7 +432,7 @@ const Admin = () => {
     const [books,setBooks] = useState();
 
     const getBooks = () => {
-        fetch(`${url}/books`,{
+        fetch(`${BaseUrl}books`,{
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`,
             }
@@ -455,7 +454,7 @@ const Admin = () => {
     const addBookFunction = e => {
         e.preventDefault();
 
-        fetch(`${url}/books`,{
+        fetch(`${BaseUrl}books`,{
             method: "POST",
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -494,7 +493,7 @@ const Admin = () => {
     const modifyBookFunction = e => {
         e.preventDefault();
 
-        fetch(`${url}/books/${choice}`,{
+        fetch(`${BaseUrl}books/${choice}`,{
             method: "PATCH",
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -533,7 +532,7 @@ const Admin = () => {
     const deleteBookFunction = e => {
         e.preventDefault();
 
-        fetch(`${url}/books/${choice}`,{
+        fetch(`${BaseUrl}books/${choice}`,{
             method: "DELETE",
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -562,7 +561,7 @@ const Admin = () => {
     const getUserBorrowedBooks = e => {
         e.preventDefault();
 
-        fetch(`${url}/users/${username}/borrowedbooks`,{
+        fetch(`${BaseUrl}users/${username}/borrowedbooks`,{
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`
             }
@@ -584,7 +583,7 @@ const Admin = () => {
     const returnBookFunction = e => {
         e.preventDefault();
 
-        fetch(`${url}/users/${username}/returnbook`,{
+        fetch(`${BaseUrl}users/${username}/returnbook`,{
             method: "PATCH",
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`,
@@ -620,7 +619,7 @@ const Admin = () => {
     const findBorrowedBooksFunction = e => {
         e.preventDefault();
 
-        fetch(`${url}/users/findborrowers/${choice}`,{
+        fetch(`${BaseUrl}users/findborrowers/${choice}`,{
             method: "POST",
             headers:{
                 "authorization": `Bearer ${sessionStorage.getItem("token")}`,

@@ -10,9 +10,7 @@ import UserContext from "../../hooks/userContext";
 
 //Title, query,limit, and style props allow this comp to be dynamic and more reusable.
 const Books = ({title,style,limit,data}) => {
-    const url = `http://localhost:4500/books`;
-
-    const [books,pending,err] = useFetch(url);
+    const [books,pending,err] = useFetch("books");
     const [user,setUser] = useContext(UserContext);
 
     if(data) {

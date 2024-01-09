@@ -3,16 +3,15 @@ import useFetch from '../hooks/useFetch';
 import Book from './Books/Book';
 import '../assets/search.css';
 import { FaRegWindowClose } from "react-icons/fa";
+import BaseUrl from '../BaseUrl';
 
 const Search = () => {
-    const url = "http://localhost:4500/";
-
     const [titleQuery, setTitle] = useState(null);
     const [categoryQuery, setCategory] = useState(null);
     const [authorQuery, setAuthor] =useState(null);
 
-    const [authors, authorsPending, authorsErr] = useFetch(url + `authors`);
-    const [categories, categoriesPending, categoriesErr] = useFetch(url + `categories`);
+    const [authors, authorsPending, authorsErr] = useFetch(`authors`);
+    const [categories, categoriesPending, categoriesErr] = useFetch(`categories`);
 
     const [results, setResults] = useState(null);
 
@@ -37,7 +36,7 @@ const Search = () => {
     const handleSearch = e => {
         e.preventDefault();
 
-        fetch("http://localhost:4500/search",{
+        fetch(BaseUrl + "/search",{
                 method: "POST",
                 headers:{
                     "Content-Type":"application/json",

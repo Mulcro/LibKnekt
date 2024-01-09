@@ -6,21 +6,21 @@ import DisplayBooks from './DisplayBooks';
 import '../../assets/bookDetails.css';
 import cover from '../../assets/bookcover.jpg';
 import UserContext from '../../hooks/userContext';
+import BaseUrl from '../../BaseUrl';
 
 //Implement book quantity logic
 const  BookDetails = () => {
     const [user, setUser] = useContext(UserContext);
 
     const {id} = useParams();
-    const url = `http://localhost:4500/books/${id}`;
-    const [book,pending,err] = useFetch(url,);
+    const [book,pending,err] = useFetch(`books/${id}`);
     const [error,setError] = useState(null);
     
     const handleBorrow = e => {
         e.preventDefault();
         const bookId = book._id;
 
-        fetch(`http://localhost:4500/borrow/${bookId}`,{
+        fetch(BaseUrl + `borrow/${bookId}`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

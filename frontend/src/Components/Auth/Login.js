@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useContext} from "react";
 import {Link, useNavigate, useLocation } from "react-router-dom";
 import '../../assets/login.css'
 import UserContext from "../../hooks/userContext";
+import BaseUrl from "../../BaseUrl";
 
 const Login = () => {
     
@@ -27,8 +28,7 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const url = "http://localhost:4500/login";
-        fetch(url,{
+        fetch(BaseUrl + "login",{
             method: "POST",
             headers:{
                 "Content-Type":"application/json",
