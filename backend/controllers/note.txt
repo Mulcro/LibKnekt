@@ -1,1 +1,0 @@
-Find a way to validate quantity info in book controller and model to prevent it from going to negative values.

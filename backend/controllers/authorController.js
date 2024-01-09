@@ -38,7 +38,10 @@ const createAuthor = async (req,res) => {
 }
 
 const modifyAuthor = async(req,res) => {
-    if(!req.body.firstname || !req.body.lastname) return res.sendStatus(422);
+    if(!req.body.firstname || !req.body.lastname || !req.params.authorId) return res.sendStatus(422);
+
+    console.log(req.params.authorId);
+
     const author = await Author.findById(req.params.authorId).exec();
     author.firstname = req.body.firstname;
     author.lastname = req.body.lastname;
@@ -51,6 +54,8 @@ const modifyAuthor = async(req,res) => {
 }
 
 const deleteAuthor = async (req,res) => {
+    if(!req.params.authorId) return res.sendStatus(422);
+    console.log("hit");
     const result1 = await Author.findByIdAndDelete(req.params.authorId).exec();
     const result2 = await Book.find({author: req.params.authorId}).exec();
 

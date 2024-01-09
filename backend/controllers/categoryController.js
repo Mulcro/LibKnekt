@@ -38,7 +38,7 @@ const createCategory = async (req,res) => {
 }
 
 const modifyCategory = async(req,res) => {
-    if(!req.body.categoryName) return res.sendStatus(422);
+    if(!req.body.categoryName || !req.params.categoryId) return res.sendStatus(422);
     const category = await Category.findById(req.params.categoryId).exec();
     category.categoryName = req.body.categoryName;
 

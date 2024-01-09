@@ -32,17 +32,23 @@ const createBook = async (req,res) => {
 }
 
 const modifyBook = async (req,res) => {
-    if(!req.body.bookSummary || !req.body.bookTitle || !req.body.bookAuthor || !req.body.bookCategory || !req.body.bookQuantity) return res.sendStatus(422);
+    console.log(req.body);
+    if(!req.body) return res.sendStatus(422);
 
     const book = await Book.findById(req.params.bookId);
 
     if(!book) return res.sendStatus(404);
 
-    book.title = req.body.bookTitle;
-    book.category = req.body.bookCategory;
-    book.author = req.body.bookAuthor;
-    book.summary = req.body.bookSummary;
-    book.quantity = req.body.bookQuantity
+    if(req.body.bookTitle)
+        book.title = req.body.bookTitle;
+    if(req.body.bookCategory)
+        book.category = req.body.bookCategory;
+    if(req.body.bookAuthor)
+        book.author = req.body.bookAuthor;
+    if(req.body.bookSummary)
+        book.summary = req.body.bookSummary;
+    if(req.body.bookQuantity)
+        book.quantity = req.body.bookQuantity;
 
     const result = await book.save();
     if(!result) return res.sendStatus(500);
@@ -52,10 +58,10 @@ const modifyBook = async (req,res) => {
 
 const deleteBook = async (req,res) => {
     const result = await Book.findByIdAndDelete(req.params.bookId);
-    console.log(result);
     if(!result) return res.sendStatus(500);
 
     res.json(result);
 }
+
 
 module.exports = {getBooks,getBook,createBook,modifyBook,deleteBook};

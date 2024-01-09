@@ -5,36 +5,28 @@ const escapeRegex = (text) => {
 };
 
 const handleSearch = async (req,res) => {
-    console.log("Working");
-    const query = req.body.query;
-    
-    const parameter = parseInt(req.body.param, 10);
-    
-    if(!query) return res.sendStatus(404);
-    
-    const regex = new RegExp(escapeRegex(query), 'gi');
-    switch (parameter) {
-        case 1:
-            const booksByTitle = await Book.find({title: regex}).populate('author').populate('category').exec();
-    
-            res.json(booksByTitle);
-            res.status(200);
-            break;
-        
-        case 2:
-            const booksByCategory = await Book.find({category: query}).populate('author').populate('category').exec();
-            
-            res.json(booksByCategory);
-            res.status(200);
-            break;
-        
-        case 3:
-            const booksByAuthor = await Book.find({author: query}).populate('author').populate('category').exec();
-            
-            res.json(booksByAuthor);
-            res.status(200);
-            break;
-    }
+    const title = req.body.title;
+    const category = req.body.category;
+    const author = req.body.author;
+
+    const filter = {};
+
+    if(title)
+        filter.title = { $regex: new RegExp(escapeRegex(title), 'i') };
+    if(category)
+        filter.category = category;
+    if(author)
+        filter.author= author;
+
+    if(Object.keys(filter).length === 0)
+        return res.json([]);
+
+    const books = await Book.find(filter).populate('category').populate('author').exec();
+
+    if(!books) return res.status(500);
+
+    res.status(200);
+    return res.json(books);
 }
 
 module.exports = {handleSearch};

@@ -24,8 +24,6 @@ const handleUser = async (req,res) => {
             username: user,
             password: hashedPwd
         });
-
-        console.log(result);
         res.sendStatus(201);
 
     }
