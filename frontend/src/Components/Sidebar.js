@@ -24,10 +24,6 @@ const SideBar = (props) => {
         }
     }
 
-    useEffect(() => {
-        console.log(isVisible);
-    }, [isVisible]);
-    
     const triggerToggleVisisbility = () => {
         setVisiblity(!isVisible);
     }
