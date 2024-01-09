@@ -1,13 +1,22 @@
+const jwt = require('jsonwebtoken');
+
 const verifyRoles = (...allowedRoles) => {
     return (req,res,next) => {
-        //change roles to check authorization header instead of body
-        console.log(req.body.roles);
-        if(!req?.body.roles) return res.sendStatus(401);
+        const token = req.headers['authorization'].split(' ')[1];
+        jwt.verify(
+            token,
+            process.env.ACCESS_TOKEN,
+            (err,decoded) => {
+                if(err) return res.sendStatus(403);
+    
+                const userRoles = decoded.userInfo.roles;
+                const authorizedRoles = [...allowedRoles];
+                const result = userRoles.map(role => authorizedRoles.includes(role)).find(val => val === true);
+                if(!result) return res.sendStatus(401);
 
-        const authorizedRoles = [...allowedRoles];
-        const result = req.body.roles.map(role => authorizedRoles.includes(role)).find(val => val === true);
-        if(!result) return res.sendStatus(401);
-        next();
+                next();
+            }
+        )
     }
 }
 
