@@ -19,20 +19,20 @@ export const data = [
         cName: "side-text",
 
     },
-    {
-        title: "All Categories",
-        path: "/categories",
-        icon: <GiCardPick />,
-        cName: "side-text",
+    // {
+    //     title: "All Categories",
+    //     path: "/categories",
+    //     icon: <GiCardPick />,
+    //     cName: "side-text",
 
-    },
-    {
-        title: "All Authors",
-        path: "/authors",
-        icon: <FaPenNib />,
-        cName: "side-text",
+    // },
+    // {
+    //     title: "All Authors",
+    //     path: "/authors",
+    //     icon: <FaPenNib />,
+    //     cName: "side-text",
 
-    },
+    // },
     {
         title: "Search Books",
         path: "/search",
@@ -41,8 +41,8 @@ export const data = [
 
     },
     {
-        title: "User Page",
-        path: "/user",
+        title: "Admin",
+        path: "/admin",
         icon: <FaUser/>,
         cName: "side-text",
 
