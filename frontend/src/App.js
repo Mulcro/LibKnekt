@@ -9,15 +9,8 @@ import Register from './Components/Auth/Register';
 import DisplayBooks from './Components/Books/DisplayBooks';
 import BookDetails from './Components/Books/BookDetails';
 import NotFound from './Components/NotFound';
-import AuthorDetails from './Components/Author/AuthorDetails';
-import Authors from './Components/Author/Authors';
-import Categories from './Components/Category/Category';
-import CategoryDetails from './Components/Category/CategoryDetails';
 import User from './Components/User/User';
 import Search from './Components/Search';
-import useRefresh from './hooks/useRefresh';
-import UserContext from './hooks/userContext';
-import { useContext } from 'react';
 import Admin from './Components/Admin';
 
 function App() {
