@@ -1,8 +1,9 @@
 const jwt = require('jsonwebtoken');
 
 const verifyJwt = (req,res,next) => {
+
     const authHeader = req.headers['authorization'];
-    console.log(authHeader);
+    // console.log(authHeader);
     if(!authHeader) return res.sendStatus(401)
 
     const token = authHeader.split(' ');
@@ -14,7 +15,6 @@ const verifyJwt = (req,res,next) => {
         authToken,
         process.env.ACCESS_TOKEN,
         (err,decoded) => {
-            // console.log(authToken);
             if(err) return res.sendStatus(403);
             
             req.user = decoded.userInfo.username;
