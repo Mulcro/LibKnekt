@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3500;
 const connectDb = require('./config/connectDb');
 const verifyJwt = require('./middleware/verifyJWT');
 const cookieParser = require('cookie-parser');
@@ -41,8 +41,10 @@ app.use('/refresh', require('./routes/refresh'));
 //Search route
 app.use('/search', require('./routes/search'));
 
-// //Secure all routes with jwt verification
-// app.use(verifyJwt);
+
+
+//Secure all routes with jwt verification
+app.use(verifyJwt);
 
 //book api route
 app.use('/books', require('./routes/api/books'));
