@@ -1,14 +1,19 @@
 const jwt = require('jsonwebtoken');
 const User = require('../model/User');
 
+//Had to store refresh token in body because I couldn't get cookies to send through the browser
 const handleRefresh = async (req,res) => {
-    console.log("hit");
-    console.log(req.cookies);
-    const cookies = req.cookies;
-    if(!cookies?.jwt) return res.sendStatus(401);
+    const authHeader = req.headers['authorization'];
+    if(!authHeader) return res.sendStatus(401)
 
-    const refreshToken = cookies.jwt;
-    const foundUser = await User.findOne({refreshToken: refreshToken}).exec();
+    const token = authHeader.split(' ');
+    if(token.length !== 2) return res.sendStatus(401);
+    if(token[0] !== 'Bearer') return res.sendStatus(401);;
+
+    const refreshToken = token[1];
+    const foundUser = await User.findOne({refreshToken: refreshToken}).populate('books').exec();
+    
+    if(!foundUser) return res.sendStatus(404);
 
     jwt.verify(
         refreshToken,
@@ -26,7 +31,7 @@ const handleRefresh = async (req,res) => {
             process.env.ACCESS_TOKEN,
             {expiresIn: "300s"});
 
-            return res.json({"accessToken":accessToken});
+            return res.json({"accessToken":accessToken,"user":foundUser.username,"books":foundUser.books,"roles":foundUser.roles});
         }
     );
 }
