@@ -9,17 +9,22 @@ router.route("/")
     
 router.route("/:username")
     .get(userController.getUser)
-    .patch(verifyRoles(ROLES.Editor,ROLES.Admin),userController.updateUser)
-    .post(verifyRoles(ROLES.Editor,ROLES.Admin),userController.returnBook)
+    .patch(userController.updateUser)
     .delete(verifyRoles(ROLES.Admin),userController.deleteUser);
 
+router.route("/:username/returnbook")
+    .patch(userController.returnBook);
+    
 router.route("/:username/addrole")
     .patch(verifyRoles(ROLES.Editor,ROLES.Admin),userController.addRole);
 
 router.route("/:username/deleterole")
     .patch(verifyRoles(ROLES.Admin),userController.deleteRole);
 
-router.route("/:username/changepwd")
-    .patch(userController.updatePassword);
+router.route("/:username/borrowedbooks")
+    .get(userController.getBorrowedBooks);
+
+router.route("/findborrowers/:bookId")
+    .post(verifyRoles(ROLES.Admin),userController.findBorrowers);
 
 module.exports = router;
