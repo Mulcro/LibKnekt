@@ -6,12 +6,13 @@ const handleLogin = async (req,res) => {
     const user = req.body.user.toLowerCase();
     const pwd = req.body.pwd;
     if(!user || !pwd) return res.sendStatus(400);
-    const foundUser = await User.findOne({username: user}).exec();
+    const foundUser = await User.findOne({username: user}).populate('books').exec();
     
     if(!foundUser) return res.sendStatus(401);
-
+    
     const match = await bcrypt.compare(pwd, foundUser.password);
     if(match){
+        const books = Object.values(foundUser.books);
         const roles = Object.values(foundUser.roles);
         const accessToken = jwt.sign(
             {"userInfo": {
@@ -30,12 +31,13 @@ const handleLogin = async (req,res) => {
         foundUser.refreshToken = refreshToken;
         const result = await foundUser.save();
         if(!result) return res.status(500);
-        
+        console.log(books);
         res.status(200);
 
-        res.cookie("jwt",refreshToken,{ sameSite: "None", secure:true, maxAge: 24*60*60*1000});  
+        //Had to store refresh token in json since i couldn't figure out how to get the cookies to send to the browser
+        // res.cookie("jwt",refreshToken,{ sameSite: "lax", secure:false, maxAge: 24*60*60*1000});  
             //Note that chrome requires sameSite: "None" and secure:true in order for the cookie to be sent through
-        res.json({user, roles, accessToken});
+        res.json({user, books, roles, accessToken,refreshToken});
     }
     else{
         res.sendStatus(500);
