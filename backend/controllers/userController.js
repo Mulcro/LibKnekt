@@ -101,6 +101,7 @@ const updateUser = async (req,res) => {
 }
 
 const updatePassword = async (req,res) => {
+    console.log("working");
     if(!req.params.username && !req.body.oldpassword && !req.body.newpassword) return res.sendStatus(422);
 
     const username = req.params.username;
