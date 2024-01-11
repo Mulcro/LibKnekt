@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-import UserContext from '../Context/userContext';    
+import UserContext from './Context/userContext';    
 
 const Auth = ({allowedRoles}) => {
     const [user,setUser] = useContext(UserContext);
