@@ -13,8 +13,8 @@ router.route("/:username")
     .delete(verifyRoles(ROLES.Admin),userController.deleteUser);
 
 router.route("/:username/changepwd")
-    .patch(userController.changePassword);
-    
+    .patch(userController.updatePassword);
+
 router.route("/:username/returnbook")
     .patch(userController.returnBook);
     
