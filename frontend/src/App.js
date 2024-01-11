@@ -12,6 +12,12 @@ import NotFound from './Components/NotFound';
 import User from './Components/User/User';
 import Search from './Components/Search';
 import Admin from './Components/Admin';
+import RequireAuth from './Components/RequireAuth';
+
+const ROLES = {
+  User: 20,
+  Admin: 1
+}
 
 function App() {
 
@@ -25,11 +31,17 @@ function App() {
               <Route path='/' element={<Home/>}/>
               <Route path='/login' element={<Login/>}/>
               <Route path='/register' element={<Register/>}/>
-              <Route path='/books' element={<DisplayBooks title={"All Books"} style={0}/>}/>
-              <Route path='/books/:id' element={<BookDetails/>}/>
-              <Route path='/search' element={<Search/>}/>
-              <Route path='/users/:id' element={<User/>}/>
-              <Route path='/admin' element={<Admin/>}/>
+              
+              <Route element={<RequireAuth allowedRoles={[ROLES.User]}/>}>
+                <Route path='/books' element={<DisplayBooks title={"All Books"} style={0}/>}/>
+                <Route path='/books/:id' element={<BookDetails/>}/>
+                <Route path='/search' element={<Search/>}/>
+                <Route path='/users/:id' element={<User/>}/>
+              </Route>
+
+              <Route element={<RequireAuth allowedRoles={[ROLES.Admin]}/>}>
+                <Route path='/admin' element={<Admin/>}/>
+              </Route>
 
               {/* 404 */}
               <Route path='*' element={<NotFound/>}/>
