@@ -1,6 +1,6 @@
-import {Link} from 'react-router-dom';
+import {Link,useLocation, useNavigate} from 'react-router-dom';
 import "../../assets/register.css";
-import { useEffect, useRef, useState ,useLocation, useNavigate} from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BaseUrl from '../../BaseUrl';
 
 const NAME_REGEX = /^[A-Z][a-z]{2,30}$/;
