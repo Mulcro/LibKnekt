@@ -12,7 +12,7 @@ import NotFound from './Components/NotFound';
 import User from './Components/User/User';
 import Search from './Components/Search';
 import Admin from './Components/Admin';
-import Auth from './Components/Auth';
+import Auth from './/Components/Auth';
 
 const ROLES = {
   User: 20,
