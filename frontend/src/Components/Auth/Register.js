@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import "../../assets/register.css";
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState ,useLocation, useNavigate} from 'react';
 import BaseUrl from '../../BaseUrl';
 
 const NAME_REGEX = /^[A-Z][a-z]{2,30}$/;
@@ -9,6 +9,9 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-_!@#$%]).{8,24}$/;
 
 const Register = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const [uName,setUname] = useState("");
     const [uFocus,setUfocus] = useState();
     const [validUname, setValidUname] = useState(false);
@@ -86,8 +89,10 @@ const Register = () => {
             throw new Error(res.status);
         })
         .then(data => {
-            console.log("success");
-            console.log(data);
+            alert("Registration successful");
+            setTimeout(() =>{
+                navigate("/login", {state:{from:location}, replace: true});
+            },1500)
         })
         .catch((err => {
             console.log(err.response.status);
@@ -122,7 +127,7 @@ const Register = () => {
                     onFocus={() => setFnameFocus(true)}
                     onBlur={() => setFnameFocus(false)}
                 />
-                <p className={fNameFocus ? "instructions" : "hide"}>Enter your First Name</p>
+                <p className={fNameFocus ? "instructions" : "hide"}>Enter your First Name making sure the first letter is in uppercase</p>
 
                 <label htmlFor="lName">Last Name:</label>
                 <input 
@@ -133,7 +138,7 @@ const Register = () => {
                     onFocus={() => setLnameFocus(true)}
                     onBlur={() => setLnameFocus(false)}
                 />
-                <p className={lNameFocus ? "instructions" : "hide"}>Enter your Last Name</p>
+                <p className={lNameFocus ? "instructions" : "hide"}>Enter your Last Name making sure the first letter is in uppercase</p>
 
                 <label htmlFor="email">Email:</label>
                 <input 
