@@ -12,7 +12,7 @@ import NotFound from './Components/NotFound';
 import User from './Components/User/User';
 import Search from './Components/Search';
 import Admin from './Components/Admin';
-import RequireAuth from './Components/RequireAuth';
+import Auth from './Components/Auth';
 
 const ROLES = {
   User: 20,
@@ -32,14 +32,14 @@ function App() {
               <Route path='/login' element={<Login/>}/>
               <Route path='/register' element={<Register/>}/>
               
-              <Route element={<RequireAuth allowedRoles={[ROLES.User]}/>}>
+              <Route element={<Auth allowedRoles={[ROLES.User]}/>}>
                 <Route path='/books' element={<DisplayBooks title={"All Books"} style={0}/>}/>
                 <Route path='/books/:id' element={<BookDetails/>}/>
                 <Route path='/search' element={<Search/>}/>
                 <Route path='/users/:id' element={<User/>}/>
               </Route>
 
-              <Route element={<RequireAuth allowedRoles={[ROLES.Admin]}/>}>
+              <Route element={<Auth allowedRoles={[ROLES.Admin]}/>}>
                 <Route path='/admin' element={<Admin/>}/>
               </Route>
 
