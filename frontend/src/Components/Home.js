@@ -15,7 +15,9 @@ const HomePage = () => {
                     <h1 className="title">
                         Welcome to LibKnet
                     </h1>
-
+                    <h4>To test out admin features log in with the following username and password.</h4>
+                    <h4>Username: lero1</h4> 
+                    <h4>Password: Libknekt2024!</h4>
                     <h4>Please <span ><Link className='homeLink' to ="/login">Login</Link></span> or <span><Link className='homeLink' to ="/register">Register</Link></span> to Proceed</h4>
                 </div>
             </section>
